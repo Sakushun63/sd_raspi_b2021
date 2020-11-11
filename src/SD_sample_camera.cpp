@@ -1,3 +1,4 @@
+//  https://wiki.ros.org/image_transport/Tutorials/SubscribingToImages をほぼそのまま使用
 #include <ros/ros.h>
 
 #include <image_transport/image_transport.h>

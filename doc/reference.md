@@ -22,14 +22,3 @@
 - [Sensor_msgs::Laserscan](http://docs.ros.org/en/api/sensor_msgs/html/msg/LaserScan.html)
 - [Sensor_msgs::Image](http://docs.ros.org/en/melodic/api/sensor_msgs/html/msg/Image.html)
 
-### その他
-
-- [Gazeboで走るRasPiMouse](https://rt-net.jp/mobility/archives/3544)
-
-  - [リポジトリ](https://github.com/rt-net/raspimouse_sim/tree/melodic-devel)：masterブランチではなく、melodic-develブランチを使用するようにする。
-
-  - アールティが開発しているraspimouseのシミュレーションプログラム
-
-  - 少々古くなっており、また使いこなすのは多少難易度が高い
-
-    
