@@ -13,11 +13,16 @@ private:
   ros::Subscriber sub_laser;
   ros::Publisher pub_vel;
 
+  // laser scanの測定値を保存する変数の定義
   sensor_msgs::LaserScan latest_scan;
+
+  // 速度指令値を保存する変数の定義
   geometry_msgs::Twist cmd_msg;
 
   // 2Hzで制御ループを回す
   const int loop_rate = 2;
+
+  // メッセージの初回受信を確認する変数
   bool is_recieved_scan = false;
 
 public:
@@ -74,14 +79,14 @@ public:
 
         cnt=0;
 
-        ROS_INFO("cernter laser value %5f : rotate", center_value);
+        ROS_INFO("center laser value %5f : rotate", center_value);
       }
       else
       {
         cmd_msg = create_vel_msg(0.3, 0.0);
         pub_vel.publish(cmd_msg);
 
-        ROS_INFO("cernter laser value %8f : move on", center_value);
+        ROS_INFO("center laser value %8f : move on", center_value);
       }
 
       // 指定したループ周期になるように調整

@@ -16,8 +16,9 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   image_transport
   cv_bridge
-  OpenCV
 )
+
+find_package(OpenCV REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)

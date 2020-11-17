@@ -15,7 +15,7 @@ private:
     image_transport::ImageTransport it_;
     image_transport::Subscriber sub_;
     
-    const char* template_img_path_ = "/home/${USERNAME}/Pictures/template.png";
+    const char* template_img_path_ = "/home/kitajima/Pictures/template.png";
     Mat template_img_;
     int match_method_ = CV_TM_SQDIFF;
 

@@ -9,7 +9,7 @@
  </include>
 
  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
-    args="-param robot_description -urdf -model SimpleMouse" />
+     args="-param robot_description -urdf -model SimpleMouse" />
 
 
  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />

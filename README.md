@@ -2,6 +2,8 @@
 
 ## 使い方
 
+- ```src/metch_templete.cpp```内の```${USERNAME}```は、各自の環境のユーザ名に変更して有効なパスになるようにする
+
 ```shell
 cd ~/catkin_ws/src
 git clone https://github.com/sskitajima/sd_sample_pkg.git
@@ -12,6 +14,7 @@ catkin_make
 ## サンプルプログラム
 
 - 各処理の詳細や内容についてはソースコードを見てほしい
+- カメラを用いたサンプルがあるが、ロボットへのカメラのモデリングは行っていない。
 
 ### トピック通信のサンプルプログラム
 
@@ -26,7 +29,7 @@ roscore
 rosrun sd_sample_pkg talker_node
 
 # termianl 3
-rosrun sd_sample_pkg listner_node
+rosrun sd_sample_pkg listener_node
 ```
 
 ### レーザースキャナとカメラのサンプルプログラム
@@ -60,6 +63,7 @@ rosrun sd_sample_pkg teleop.py
 ### 画像処理のサンプルプログラム
 
 - ```src/metch_templete.cpp```
+  - テンプレート画像のパスを適切なものに書き換えてからビルドする。
 
 ```shell
 # teminal 1
