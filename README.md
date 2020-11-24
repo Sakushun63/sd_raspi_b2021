@@ -60,6 +60,12 @@ roscore
 rosrun sd_sample_pkg teleop.py
 ```
 
+- もしくは、以下のようにして実行してもよい。
+
+```sh
+rosrun teleop_twist_keybod teleop_twist_keyboard.py
+```
+
 ### 画像処理のサンプルプログラム
 
 - ```src/metch_templete.cpp```
@@ -70,7 +76,7 @@ rosrun sd_sample_pkg teleop.py
 roscore
 
 # teminal 2
-rosrun sd_samp@le_pkg matching_node
+rosrun sd_sample_pkg matching_node
 ```
 
 
