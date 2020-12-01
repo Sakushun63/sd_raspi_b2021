@@ -9,7 +9,9 @@
 
 - [gazebo公式のROSプラグインのチュートリアル](http://gazebosim.org/tutorials?tut=ros_gzplugins)
 - [ROS公式のurdfチュートリアル](http://wiki.ros.org/ja/urdf/Tutorials)
-- このあたりは非常にネット上の情報が多いので調べてみましょう
+  - このあたりは非常にネット上の情報が多いので調べてみましょう
+- [model_editor](http://gazebosim.org/tutorials?tut=model_editor)
+- [building_editor](http://gazebosim.org/tutorials?cat=build_world&tut=building_editor)
 
 ## ROSプログラミング
 
