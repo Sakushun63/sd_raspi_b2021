@@ -62,7 +62,7 @@ public:
 
       // 回転判定してから一定回数は回転司令を与え続ける
       cnt++;
-      if (cnt < 4)
+      if (cnt < 6)
       {
         pub_vel.publish(cmd_msg);
         continue;
@@ -74,23 +74,37 @@ public:
       // 複数あるセンサの値のうち、中央にある値を取得する
       // http://docs.ros.org/en/api/sensor_msgs/html/msg/LaserScan.html
       const double center_value = latest_scan.ranges[latest_scan.ranges.size() / 2];
+      const double right_value = latest_scan.ranges[latest_scan.ranges.size() / 3];
+      const double left_value = latest_scan.ranges[latest_scan.ranges.size() * 2 / 3];
 
-      if (center_value < 0.5)
-      {
+      if (center_value < 2){
         cmd_msg = create_vel_msg(0.0, 0.5);
         pub_vel.publish(cmd_msg);
 
         cnt=0;
 
         ROS_INFO("center laser value %5f : rotate", center_value);
-      }
-      else
-      {
+      }else{
+        if (right_value < 1){
+	  cmd_msg = create_vel_msg(0.0, 0.5);
+	  pub_vel.publish(cmd_msg);
+
+	  ROS_INFO("center laser value %5f : detect on right, go left", left_value);
+        }else if (left_value < 1){
+	  cmd_msg = create_vel_msg(0.0, -0.5);
+	  pub_vel.publish(cmd_msg);
+
+	  ROS_INFO("center laser value %5f : detect on left, go right", right_value);
+        }else{
         cmd_msg = create_vel_msg(0.3, 0.0);
         pub_vel.publish(cmd_msg);
 
         ROS_INFO("center laser value %8f : move on", center_value);
+	}
       }
+
+      
+      
 
       // 指定したループ周期になるように調整
       r.sleep();

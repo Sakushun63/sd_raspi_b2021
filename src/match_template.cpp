@@ -15,7 +15,7 @@ private:
     image_transport::ImageTransport it_;
     image_transport::Subscriber sub_;
     
-    const char* template_img_path_ = "/home/${USERNAME}/Pictures/template.png";
+    const char* template_img_path_ = "/home/sakushun/template.png";
     Mat template_img_;
     int match_method_ = CV_TM_SQDIFF;
 
@@ -23,7 +23,7 @@ public:
     TemplateMatchingNode()
     : it_(nh_)
     {
-         sub_ = it_.subscribe("/camera/rgb/image_color", 1, &TemplateMatchingNode::camera_callback, this);
+         sub_ = it_.subscribe("/cfront/image_raw", 1, &TemplateMatchingNode::camera_callback, this);
          template_img_ = cv::imread(template_img_path_);
     }
 

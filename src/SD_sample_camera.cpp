@@ -35,7 +35,7 @@ int main(int argc, char** argv)
   image_transport::ImageTransport it(nh);
 
   // image_transportを介して、画像のトピックのサブスクライバの定義
-  image_transport::Subscriber sub = it.subscribe("/camera/rgb/image_color", 1, camera_callback);
+  image_transport::Subscriber sub = it.subscribe("/cfront/image_raw", 1, camera_callback);
 
   // おまじない
   ros::spin();
