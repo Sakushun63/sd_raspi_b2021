@@ -904,7 +904,7 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='trap_3'>
-          <pose frame=''>-3 4 0 0 0 0</pose>
+          <pose frame=''>-3 7 0 0 0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>

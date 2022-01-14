@@ -78,12 +78,12 @@ public:
       ros::spinOnce();
 
       // 回転判定してから一定回数は回転司令を与え続ける
-      cnt++;
-      if (cnt < 3)
-      {
-        pub_vel.publish(cmd_msg);
-        continue;
-      }
+      //cnt++;
+      //if (cnt < 3)
+      //{
+       // pub_vel.publish(cmd_msg);
+        //continue;
+      //}
 
       // 値を取得しないままlatest_scan変数にアクセスするとエラーを起こすので判定
       if(!is_recieved_scan) continue;
@@ -116,7 +116,7 @@ public:
 	}	  
       }else{
  	if (center_value < 1.0){//前方衝突回避
-          cmd_msg = create_vel_msg(0.1, 0.5);//左回転
+          cmd_msg = create_vel_msg(0, 0.5);//左回転
           pub_vel.publish(cmd_msg);
           cnt=0;
           ROS_INFO("center laser value %5f : rotate", center_value);
