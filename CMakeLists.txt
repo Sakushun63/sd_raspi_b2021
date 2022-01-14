@@ -16,6 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   image_transport
   cv_bridge
+  darknet_ros_msgs
 )
 
 find_package(OpenCV REQUIRED)
@@ -147,9 +148,10 @@ add_executable(listener_node src/listener.cpp)
 
 add_executable(SD_sample_laser src/SD_sample_laser.cpp)
 add_executable(SD_sample_camera src/SD_sample_camera.cpp)
-add_executable(matching_node
-  src/match_template.cpp
-)
+add_executable(matching_node src/match_template.cpp)
+add_executable(SD_wall_tracker src/SD_wall_tracker.cpp)
+add_executable(sd_detector src/sd_detector.cpp)
+add_executable(sd_detectorNew src/sd_detectorNew.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -170,6 +172,16 @@ target_link_libraries(listener_node
 )
 
 target_link_libraries(SD_sample_laser
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(SD_wall_tracker
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(sd_detector
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(sd_detectorNew
   ${catkin_LIBRARIES}
 )
 target_link_libraries(SD_sample_camera

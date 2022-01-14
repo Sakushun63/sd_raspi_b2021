@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<launch>
+
+ <param name="robot_description"
+     command="$(find xacro)/xacro '$(find sd_sample_pkg)/urdf/robot.urdf.xacro'" />
+
+ <include file="$(find gazebo_ros)/launch/empty_world.launch">
+   <arg name="world_name" value="$(find sd_sample_pkg)/worlds/rotate_world.world"/>
+ </include>
+
+ <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+     args="-param robot_description -urdf -model SimpleMouse" />
+
+
+ <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+ <node name="rviz" pkg="rviz" type="rviz" args="-f odometry" />
+ <!--<node name="SD_wall_tracker" pkg="sd_sample_pkg" type="SD_wall_tracker" />-->
+ <node name="SD_sample_laser" pkg="sd_sample_pkg" type="SD_sample_laser" />
+
+</launch>

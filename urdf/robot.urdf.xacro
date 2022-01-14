@@ -23,6 +23,7 @@
  <xacro:wheel rl="r" parent="body" />
  <xacro:wheel rl="l" parent="body" />
  <xacro:gazebo_light_sensor name="front" parent="body" xyz="0 0.02 0.03" direction="0" />
- <xacro:camera_macro name="cfront" parent="body" xyz="0 0 0"/>
+ <xacro:camera_macro name="camera/rgb" parent="body" xyz="0 0 0" rpy="${radians(-90)} ${radians(180)} 0"/>
+ <!--<xacro:camera_macro name="under" parent="body" xyz="0 -1 0" rpy="0 ${radians(180)} 0"/>-->
 
 </robot>
