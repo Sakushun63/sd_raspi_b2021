@@ -309,7 +309,7 @@
         <collision name='trap_1_Collision'>
           <geometry>
             <box>
-              <size>6.5 0.15 0.5</size>
+              <size>3.5 0.15 0.5</size>
             </box>
           </geometry>
           <pose frame=''>0 0 0 0 -0 0</pose>
@@ -331,7 +331,7 @@
           <pose frame=''>0 0  0 0 -0 0</pose>
           <geometry>
             <box>
-              <size>6.5 0.15 0.5</size>
+              <size>3.5 0.15 0.5</size>
             </box>
           </geometry>
           <material>
@@ -833,10 +833,10 @@
         </link>
       </model>
       <model name='coke_can1'>
-        <pose frame=''>0.9 6.5 -0.003107 -0.057105 -0.011188 -0.000702</pose>
+        <pose frame=''>-3.5 -5.5 -0.003107 -0.057105 -0.011188 -0.000702</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0.9 6.5 -0.003107 -0.057105 -0.011188 -0.000702</pose>
+          <pose frame=''>-3.5 -5.5 -0.003107 -0.057105 -0.011188 -0.000702</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>8e-06 -5e-06 -2e-06 8.2e-05 0.000136 1.4e-05</acceleration>
           <wrench>3e-06 -2e-06 -1e-06 0 -0 0</wrench>
@@ -898,13 +898,13 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
 	<link name='trap_2'>
-          <pose frame=''>-2 1  0 0 -0 1.5708</pose>
+          <pose frame=''>-3 1  0 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='trap_3'>
-          <pose frame=''>-3 7 0 0 0 0</pose>
+          <pose frame=''>-3 4 0 0 0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>

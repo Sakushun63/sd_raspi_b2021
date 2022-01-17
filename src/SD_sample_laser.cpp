@@ -24,9 +24,10 @@ private:
   sensor_msgs::LaserScan latest_scan;
 
   geometry_msgs::Twist cmd_msg;
-  const int loop_rate = 10;
+  const int loop_rate = 1;
   bool is_recieved_scan = false;
-  //bool is_detect = false;
+  bool is_detect = false;
+  bool goal = false;
   int xmin;
   int xmax;
 
@@ -85,72 +86,70 @@ public:
         //continue;
       //}
 
-      // 値を取得しないままlatest_scan変数にアクセスするとエラーを起こすので判定
       if(!is_recieved_scan) continue;
 
-      // 複数あるセンサの値のうち、中央にある値を取得する
-      // http://docs.ros.org/en/api/sensor_msgs/html/msg/LaserScan.html
       const double center_value = latest_scan.ranges[latest_scan.ranges.size() / 2];
       const double right_value = latest_scan.ranges[latest_scan.ranges.size() / 4];
       const double left_value = latest_scan.ranges[latest_scan.ranges.size() * 3 / 4];
-      //const int xmin = box.bounding_boxes;
-      const int detecting = msg_include_count.count;
-      
+      const int detecting = msg_include_count.count;      
+
+      if(!goal){
       if (detecting){//stop
-	//for(darknet_ros_msgs::BoundingBox& box : boxes):
-	  xmin = boxes.bounding_boxes[0].xmin;
-	  xmax = boxes.bounding_boxes[0].xmax;
-	if(xmax-xmin > 20){ 
-          cmd_msg = create_vel_msg(0.0, 0.0);        
-          ROS_INFO("GOAL!!!!! XMAX:%d XMIN*%d", xmax, xmin);
-	  break;
-	//}else if ((xmax+xmin)/2 < 200){
-          //cmd_msg = create_vel_msg(0.2, 0.2);        
-          //ROS_INFO("APROACHING LEFT XMAX:%d XMIN:%d", xmax, xmin);
-	//}else if ((xmax+xmin)/2 > 500){
-          //cmd_msg = create_vel_msg(0.2, -0.2);        
-          //ROS_INFO("APROACHING RIGHT XMAX:%d XMIN:%d", xmax, xmin);
-	}else{
-          cmd_msg = create_vel_msg(0.2, 0.0);        
-          ROS_INFO("APROACHING XMAX:%d XMIN:%d", xmax, xmin);
-	}	  
-      }else{
- 	if (center_value < 1.0){//前方衝突回避
-          cmd_msg = create_vel_msg(0, 0.5);//左回転
+        is_detect = true;
+      }
+      if(is_detect){
+	xmin = boxes.bounding_boxes[0].xmin;
+	xmax = boxes.bounding_boxes[0].xmax;
+        /*if (center_value < 1.0){//前方衝突回避
+          cmd_msg = create_vel_msg(0.0, 0.4);//左回転
           pub_vel.publish(cmd_msg);
           cnt=0;
           ROS_INFO("center laser value %5f : rotate", center_value);
+	}else */if(xmax-xmin > 18){    
+          ROS_INFO("GOAL! XMAX:%d XMIN*%d", xmax, xmin);
+	  goal = true;
+	}else if ((xmax+xmin)/2 < 400){
+          cmd_msg = create_vel_msg(0.1, 0.1);    
+	    pub_vel.publish(cmd_msg);    
+          ROS_INFO("APROACHING LEFT XMAX:%d XMIN:%d", xmax, xmin);
+	}else if ((xmax+xmin)/2 > 400){
+          cmd_msg = create_vel_msg(0.1, -0.1);    
+	    pub_vel.publish(cmd_msg);    
+          ROS_INFO("APROACHING RIGHT XMAX:%d XMIN:%d", xmax, xmin);
+	}
+      }else{
+ 	if (center_value < 0.3){//前方衝突回避
+          cmd_msg = create_vel_msg(0.0, 0.5);//左回転
+          pub_vel.publish(cmd_msg);
+          cnt=0;
+          ROS_INFO("center laser value %5f : rotate", center_value);
+        }else if (right_value < 0.4){
+	  cmd_msg = create_vel_msg(0.45, 0.15);
+	  pub_vel.publish(cmd_msg);
+	  ROS_INFO("center laser value %5f : turn left", left_value);
+        }else if (0.4<right_value<0.7){
+	  cmd_msg = create_vel_msg(0.45, -0.15);
+	  pub_vel.publish(cmd_msg);
+	  ROS_INFO("center laser value %5f : turn right", left_value);
         }else{
-          if (right_value < 0.4){
-	    cmd_msg = create_vel_msg(0.3, 0.3);
-	    pub_vel.publish(cmd_msg);
-	    ROS_INFO("center laser value %5f : turn left", left_value);
-          }else if (0.6<right_value<0.8){
-	    cmd_msg = create_vel_msg(0.3, -0.3);
-	    pub_vel.publish(cmd_msg);
-	    ROS_INFO("center laser value %5f : turn right", left_value);
-          }else{
-            cmd_msg = create_vel_msg(0.3, -0.6);
-            pub_vel.publish(cmd_msg);
-            ROS_INFO("center laser value %8f : move on", center_value);
-	  }
-        }
+          cmd_msg = create_vel_msg(0.3, -0.6);
+          pub_vel.publish(cmd_msg);
+          ROS_INFO("center laser value %8f : move on", center_value);
+	}
       }
-      // 指定したループ周期になるように調整
+      }else{
+          cmd_msg = create_vel_msg(0.0, 0.0);    
+          pub_vel.publish(cmd_msg);    
+          ROS_INFO("GOALED XMAX:%d XMIN*%d", xmax, xmin);
+      }	
       r.sleep();
     }
   }
 };
 
-int main(int argc, char **argv)
-{   
+int main(int argc, char **argv){   
   ros::init(argc, argv, "laser_sample_node");
-
-  // クラスLaserSampleNodeの実体となる変数nodeの定義
   LaserSampleNode node = LaserSampleNode();
-
-  // メインループを回す
   node.mainloop();
-
   return 0;
 }

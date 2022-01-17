@@ -2,9 +2,9 @@
 <!-- p.92  -->
 <robot name="light_sensor" xmlns:xacro="http://ros.org/wiki/xacro">
 
-<xacro:property name="light_range" value="6"/>
+<xacro:property name="light_range" value="10"/>
 <xacro:property name="min_range" value="0.01"/>
-<xacro:property name="max_range" value="0.5"/>
+<xacro:property name="max_range" value="1.0"/>
 <xacro:property name="PI" value="3.14159265358979"/>
 
 <xacro:macro name="gazebo_light_sensor" params="name parent xyz direction">
